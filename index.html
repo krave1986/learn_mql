@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediaQueryList Example</title>
+    <style>
+        html {
+            font-family: sans-serif;
+            background-color: white;
+        }
+
+        body {
+            padding: 20px;
+            margin: 10px;
+            background-color: blue;
+            border: 10px solid black;
+        }
+
+        h1,
+        p {
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.3rem;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>matchMedia test</h1>
+
+    <p></p>
+
+    <h1 class="mq-value"></h1>
+</body>
+
+<script>
+    let mediaQueryList
+    // 因为 resolution 媒体查询，一旦初始值设定的不合适，压根连一次都不会触发
+    // 为了避免这个情况的发生，我们可以获取当前的 devicePixelRatio ，作为初始媒体查询
+    // 来确保在 resolution 发生变化时，能够触发监听器。
+    function assignMediaQueryList() {
+        mediaQueryList = window.matchMedia(`(resolution: ${window.devicePixelRatio}dppx)`)
+        mediaQueryList.addEventListener("change", screenTest)
+    }
+
+    function screenTest(e) {
+        // 一旦触发，说明 resolution 变了，为了能够改变，都能够触发，
+        // 我们再一次将当前的 resolution 作为 media query 去创建 mediaQueryList 对象
+        mediaQueryList.removeListener(screenTest)
+        assignMediaQueryList()
+        // your logic here
+        myLogic()
+    }
+
+    function myLogic() {
+        console.log(`现在的 resolution 是 ${window.devicePixelRatio} dppx`);
+    }
+
+    assignMediaQueryList()
+
+</script>
+
+</html>
