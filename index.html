@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>MediaQueryList Example</title>
+        <style>
+            html {
+                font-family: sans-serif;
+                background-color: white;
+            }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MediaQueryList Example</title>
-    <style>
-        html {
-            font-family: sans-serif;
-            background-color: white;
-        }
+            body {
+                padding: 20px;
+                margin: 10px;
+                background-color: blue;
+                border: 10px solid black;
+            }
 
-        body {
-            padding: 20px;
-            margin: 10px;
-            background-color: blue;
-            border: 10px solid black;
-        }
+            h1,
+            p {
+                text-align: center;
+            }
 
-        h1,
-        p {
-            text-align: center;
-        }
+            p {
+                font-size: 1.3rem;
+            }
+        </style>
+    </head>
 
-        p {
-            font-size: 1.3rem;
-        }
-    </style>
-</head>
+    <body>
+        <span class="mq-value"></span>
+    </body>
 
-<body>
-    <span class="mq-value"></span>
-</body>
+    <script>
+        let pixelRatioBox = document.querySelector(".pixel-ratio");
+        let mqString = `(resolution: ${window.devicePixelRatio}dppx)`;
 
-<script>
-    let mql = window.matchMedia("(max-width: 600px)");
-
-    document.querySelector(".mq-value").innerText = mql.matches;
-</script>
-
+        const updatePixelRatio = () => {
+            let pr = window.devicePixelRatio;
+            let prString = (pr * 100).toFixed(0);
+        };
+    </script>
 </html>
